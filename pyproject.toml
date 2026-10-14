@@ -24,6 +24,9 @@ ipykernel = ">=6,<8"
 nbconvert = ">=7,<8"
 pandas = ">=2.2,<3"
 numpy = ">=2,<3"
+requests = ">=2.32,<3"
+matplotlib = ">=3.9,<4"
+geopandas = ">=1.0,<2"
 pytest = ">=8,<10"
 
 [tool.pixi.pypi-dependencies]
@@ -32,6 +35,8 @@ tomer_peled_mgi_thesis = { path = ".", editable = true }
 [tool.pixi.tasks]
 notebook = "jupyter lab notebooks"
 check-notebook = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=120 --output-dir=runs/notebooks notebooks/0.01-tp-getting-started.ipynb"
+check-geowiki-download = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=7200 --output-dir=runs/notebooks notebooks/geowiki/0.02-tp-geowiki-2015-download.ipynb"
+check-geowiki-exploration = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir=runs/notebooks notebooks/geowiki/0.03-tp-geowiki-2015-exploration.ipynb"
 test = "python -m pytest"
 
 [tool.pytest.ini_options]

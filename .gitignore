@@ -47,3 +47,6 @@ qgis/**/*.qgs~
 qgis/**/*.qgs.bak
 
 # pixi.lock, source notebooks, guides, and QGIS definitions/projects should be versioned.
+
+# Everything in data
+data/**
