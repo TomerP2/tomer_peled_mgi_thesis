@@ -1,0 +1,39 @@
+[project]
+name = "tomer_peled_mgi_thesis"
+version = "0.1.0"
+description = "Land Cover Classification in Africa using multi-temporal and multi-modal Geospatial Foundation Model"
+authors = [{ name = "Tomer Peled" }]
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tomer_peled_mgi_thesis"]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tool.pixi.dependencies]
+python = "3.12.*"
+jupyterlab = ">=4,<5"
+ipykernel = ">=6,<8"
+nbconvert = ">=7,<8"
+pandas = ">=2.2,<3"
+numpy = ">=2,<3"
+pytest = ">=8,<10"
+
+[tool.pixi.pypi-dependencies]
+tomer_peled_mgi_thesis = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+notebook = "jupyter lab notebooks"
+check-notebook = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=120 --output-dir=runs/notebooks notebooks/0.01-tp-getting-started.ipynb"
+test = "python -m pytest"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --import-mode=importlib"
