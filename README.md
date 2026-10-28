@@ -67,6 +67,18 @@ to rescan the original. Tables go to `runs/tables/geowiki/14871660/`, figures to
 Authored notebooks remain under `notebooks/`. Read the [CSV source notes](data/raw/geowiki/14871660/README.md)
 and [boundary notes](data/external/natural_earth/README.md) for provenance and limitations.
 
+## Test-site data feasibility (Galileo inputs)
+
+[Notebook 0.04](notebooks/downloading_preprocessing_input/0.04-tp-test-site-sentinel1.ipynb) downloads and
+preprocesses Sentinel-1 for one Geo-Wiki site (`TEST_SITE_ID = 1151194`, 300 x 300 m (100 m Geo-Wiki site plus margin),
+twelve 30-day composites from 2015-07-01 to 2016-07-01), mirroring the
+[Galileo](https://github.com/nasaharvest/galileo) Earth Engine code, and records
+per-step time and storage in `runs/tables/test_site/`. Further modalities get their own notebooks.
+Project-wide values (site, dates, Earth Engine login variables) live in
+[config.py](src/tomer_peled_mgi_thesis/config.py). Put `EE_PROJECT` (your Earth Engine
+Cloud project id; see [.env.example](.env.example)) in a git-ignored `.env` in the project root, which `config.py` loads, and run `earthengine authenticate`
+once. Run it with `pixi run --locked check-test-site-sentinel1`. Status: executes end to end for the test site (about 4 s and 188 KB raw per site; see the notebook conclusions).
+
 ## Pipeline overview
 
 The starter verifies setup; the Geo-Wiki notebooks implement acquisition and exploration.
@@ -127,6 +139,28 @@ after checking size, licensing, and sensitivity. PyQGIS remains optional.
 Add `models/` or `configs/` when needed.
 Agents leave changes uncommitted for review. Update this README with real commands
 and decisions as the project develops; avoid separate competing status documents.
+
+## Thesis proposal
+
+The proposal source is [thesis-proposal.tex](reports/proposal/LateX/thesis-proposal.tex).
+It follows the supplied example's six-section structure. The supplied draft includes
+the title, background, research needs, objectives, methodology, and schedule/feasibility
+notes. Figures in [img/](reports/proposal/LateX/img/README.md) include the two supplied
+methodology flowcharts and three Geo-Wiki illustrations copied from the Obsidian vault.
+Author--year citations use natbib and the sources
+in [Thesis.bib](reports/proposal/LateX/Thesis.bib), formatted with the `plainnat`
+BibTeX style. Draft TODOs and unfinished methodological details remain for the author.
+
+Build with the installed TinyTeX tools from PowerShell:
+
+```powershell
+Set-Location reports/proposal/LateX
+$env:TEXMFVAR = Join-Path (Get-Location) 'build/texmf-var'
+latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build thesis-proposal.tex
+```
+
+The PDF and auxiliary files are generated under the ignored `build/` directory.
+The local font cache keeps TinyTeX's generated fonts there as well.
 
 ## Shared guides
 

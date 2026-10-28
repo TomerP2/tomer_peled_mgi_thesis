@@ -32,7 +32,11 @@ substitute these project values. The starter notebook is
 
 ## Local overrides
 
-None yet.
+- `.env` loading: unlike the shared data guide, this project loads a git-ignored
+  `.env` in the project root from `src/tomer_peled_mgi_thesis/config.py` (python-dotenv,
+  existing environment variables win). Keep secrets only in `.env` or the environment,
+  list variable names in `.env.example`, and import `config` in notebooks instead of
+  reading `os.environ` directly.
 
 ## Task routing — conditional requirements
 

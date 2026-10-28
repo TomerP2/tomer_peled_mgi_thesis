@@ -28,6 +28,13 @@ requests = ">=2.32,<3"
 matplotlib = ">=3.9,<4"
 geopandas = ">=1.0,<2"
 pytest = ">=8,<10"
+earthengine-api = ">=1.5,<2"
+rioxarray = ">=0.17,<1"
+xarray = ">=2024.10"
+einops = ">=0.8,<1"
+h5py = ">=3.11,<4"
+tqdm = ">=4.66,<5"
+python-dotenv = ">=1.0,<2"
 
 [tool.pixi.pypi-dependencies]
 tomer_peled_mgi_thesis = { path = ".", editable = true }
@@ -37,6 +44,7 @@ notebook = "jupyter lab notebooks"
 check-notebook = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=120 --output-dir=runs/notebooks notebooks/0.01-tp-getting-started.ipynb"
 check-geowiki-download = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=7200 --output-dir=runs/notebooks notebooks/geowiki/0.02-tp-geowiki-2015-download.ipynb"
 check-geowiki-exploration = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir=runs/notebooks notebooks/geowiki/0.03-tp-geowiki-2015-exploration.ipynb"
+check-test-site-sentinel1 = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir=runs/notebooks notebooks/downloading_preprocessing_input/0.04-tp-test-site-sentinel1.ipynb"
 test = "python -m pytest"
 
 [tool.pytest.ini_options]

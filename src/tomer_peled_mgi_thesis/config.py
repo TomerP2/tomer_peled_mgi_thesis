@@ -4,7 +4,31 @@ This research package is intended to be installed editable from its project fold
 Relocating a built wheel alone does not relocate the project's datasets.
 """
 
+from datetime import date
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+# Test site for the data-acquisition feasibility notebooks (Geo-Wiki sample id).
+TEST_SITE_ID = 1151194
+# Data window and temporal binning, as in the thesis proposal and Galileo's config.
+DATA_START_DATE = date(2015, 7, 1)
+DATA_END_DATE = date(2016, 7, 1)
+DAYS_PER_TIMESTEP = 30
+# Exported area per site: the 100 x 100 m Geo-Wiki site plus a 100 m margin on each side.
+SITE_SIZE_METRES = 300
+
+# Secrets and local settings: read <project root>/.env (ignored by Git) without
+# overriding variables already set in the environment.
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+
+# Google Earth Engine login. Values come from the environment/.env (never committed);
+# see .env.example. Unset EE_PROJECT falls back to the project stored by
+# `earthengine authenticate`. A service account is used only if a key file is given.
+EE_PROJECT = os.environ.get("EE_PROJECT")
+EE_SERVICE_ACCOUNT_EMAIL = os.environ.get("EE_SERVICE_ACCOUNT_EMAIL")
+EE_SERVICE_ACCOUNT_KEY_FILE = os.environ.get("EE_SERVICE_ACCOUNT_KEY_FILE")
 
 # Resolve relative to this source file, not the notebook's working directory.
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
