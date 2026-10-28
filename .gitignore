@@ -46,6 +46,12 @@ qgis/**/*.qgz~
 qgis/**/*.qgs~
 qgis/**/*.qgs.bak
 
+# Drawio temp files
+*.drawio.bkp
+
+# Ignore PDFs that are temporary (temp_pdf folder)
+temp_pdf/
+
 # pixi.lock, source notebooks, guides, and QGIS definitions/projects should be versioned.
 
 # Everything in data
