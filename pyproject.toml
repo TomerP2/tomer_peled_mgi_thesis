@@ -45,6 +45,8 @@ check-notebook = "jupyter nbconvert --to notebook --execute --ExecutePreprocesso
 check-geowiki-download = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=7200 --output-dir=runs/notebooks notebooks/geowiki/0.02-tp-geowiki-2015-download.ipynb"
 check-geowiki-exploration = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir=runs/notebooks notebooks/geowiki/0.03-tp-geowiki-2015-exploration.ipynb"
 check-test-site-sentinel1 = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir=runs/notebooks notebooks/downloading_preprocessing_input/0.04-tp-test-site-sentinel1.ipynb"
+check-test-site-sentinel2 = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=3000 --output-dir=runs/notebooks notebooks/downloading_preprocessing_input/0.05-tp-test-site-sentinel2.ipynb"
+check-test-site-srtm = "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=1800 --output-dir=runs/notebooks notebooks/downloading_preprocessing_input/0.06-tp-test-site-srtm-dem.ipynb"
 test = "python -m pytest"
 
 [tool.pytest.ini_options]

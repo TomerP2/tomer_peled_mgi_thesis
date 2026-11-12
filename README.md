@@ -77,7 +77,7 @@ per-step time and storage in `runs/tables/test_site/`. Further modalities get th
 Project-wide values (site, dates, Earth Engine login variables) live in
 [config.py](src/tomer_peled_mgi_thesis/config.py). Put `EE_PROJECT` (your Earth Engine
 Cloud project id; see [.env.example](.env.example)) in a git-ignored `.env` in the project root, which `config.py` loads, and run `earthengine authenticate`
-once. Run it with `pixi run --locked check-test-site-sentinel1`. Status: executes end to end for the test site (about 4 s and 188 KB raw per site; see the notebook conclusions).
+once. Run it with `pixi run --locked check-test-site-sentinel1` (about 4 s and 188 KB raw per site). [Notebook 0.05](notebooks/downloading_preprocessing_input/0.05-tp-test-site-sentinel2.ipynb) does the same for Sentinel-2 MSI and NDVI (`pixi run --locked check-test-site-sentinel2`; about 6-8 s and 281 KB raw per site; a 30-day step with no scene uses the closest scenes in time, as for Sentinel-1). [Notebook 0.06](notebooks/downloading_preprocessing_input/0.06-tp-test-site-srtm-dem.ipynb) does SRTM elevation and slope (`pixi run --locked check-test-site-srtm`; about 2 s and 3 KB per site). Separately downloaded rasters do not share a grid: the DEM is offset from the Sentinel grid by a few metres, to be fixed before stacking.
 
 ## Pipeline overview
 

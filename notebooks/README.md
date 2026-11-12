@@ -6,6 +6,8 @@
 | 2 | [Geo-Wiki 2015 download](geowiki/0.02-tp-geowiki-2015-download.ipynb) | Acquire or verify the full pinned CSV and unchanged Natural Earth boundary. | Installed Pixi environment; internet on first acquisition, approximately 2 GB free space for the CSV. |
 | 3 | [Geo-Wiki 2015 exploration](geowiki/0.03-tp-geowiki-2015-exploration.ipynb) | Summarize whole sites, inspect coverage, select all African sites, and compare class pixel share with site presence. | Complete CSV and boundary from notebook 0.02; subsequent runs reuse summaries under `data/interim/geowiki/14871660/`. |
 | 4 | [downloading_preprocessing_input: Sentinel-1](downloading_preprocessing_input/0.04-tp-test-site-sentinel1.ipynb) | Download and preprocess Sentinel-1 for one 300 m area (100 m site plus margin) (Galileo method, GEE), timing each step and measuring storage. | Installed environment; Earth Engine login and `EE_PROJECT` (see `.env.example`); site summary from notebook 0.03. |
+| 5 | [downloading_preprocessing_input: Sentinel-2](downloading_preprocessing_input/0.05-tp-test-site-sentinel2.ipynb) | Download and preprocess Sentinel-2 MSI + NDVI for one 300 m area (Galileo cloud-score mosaic, GEE), timing each step and measuring storage. | Same as notebook 0.04. |
+| 6 | [downloading_preprocessing_input: SRTM DEM](downloading_preprocessing_input/0.06-tp-test-site-srtm-dem.ipynb) | Download and preprocess SRTM elevation and slope for one 300 m area (Galileo method, GEE), timing each step and measuring storage. | Same as notebook 0.04. |
 
 Add notebooks here as the project grows. Group multiple notebooks about the same
 topic in a descriptive subdirectory and link them in suggested reading/execution
