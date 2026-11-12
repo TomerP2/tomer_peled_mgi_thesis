@@ -32,6 +32,7 @@
 \acrodef{NDVI}{normalized difference vegetation index}
 \acrodef{DEM}{digital elevation model}
 \acrodef{ViT}{vision transformer}
+\acrodef{GEE}{Google Earth Engine}
 
 \title{A Solid Foundation? Geospatial Foundation Models for Land Cover Mapping in Africa}
 \author{Tomer Adam Peled}
@@ -65,7 +66,7 @@
 \section{Context and Background}
 Accurate \acp{LCM} are essential for a large variety of use cases. For example, \acp{LCM} contribute directly to the monitoring of multiple targets of the United Nations' Sustainable Development Goals, such as protecting and restoring ecosystems, enhancing inclusive and sustainable urbanization, combating deforestation and desertification, and monitoring carbon stocks \citep{moraMonitoringProgressSustainable2016}. But while the current \ac{SOTA} \acp{LCM} have a respectable overall accuracy, the accuracy in certain regions and for certain classes can be poor \citep{xuComparativeValidationRecent2024,zhaoAssessingAccuracyConsistency2023}. Regions with a more heterogeneous landscape, such as Oceania and subsaharan-Africa, have worse classification accuracy compared to homogeneous regions such as Europe \citep{zhaoAssessingAccuracyConsistency2023}. Heterogeneous landscapes require more spatial detail for correct classification, and suffer more from problems such as reference data uncertainty \citep{xuComparativeValidationRecent2024}. Classes such as 'Crops' and 'Built-up' also have lower accuracy compared to more common classes such as 'Water', 'Trees', and 'Bare Ground' \citep{xuComparativeValidationRecent2024}. These poorly-classified classes often exhibit similar spectral profiles to other classes (e.g. cropland, grassland, and shrubland looking similar).  The classification accuracy of these classes within heterogeneous regions is often particularly poor. For example, \citet{tsendbazarProductValidationReport2022} found that the 'Built-Up' class in the WorldCover map \citep{zanagaESAWorldCover102022} has a users' accuracy of 47.1\% in Africa, compared to 65.9\% globally. Similarly, cropland has a producers' accuracy of 79.3\% globally, but just 58.9\% in Africa. Critically, accurate mapping of these regions and classes is especially important for various applications. \citet{bettencourtInfrastructureDeficitsInformal2025} show that urban land cover is systematically associated with human development indicators, and \citet{kernerHowAccurateAre2024a} show that inaccuracies in cropland coverage can produce misleading agricultural statistics and estimates. Improving \ac{LCC} in Africa, especially accurate classification of the built-up and cropland classes, is therefore an important and significant goal.
 
-\ac{LCC} lends itself naturally to utilizing multi-modal data. Multi-modality refers to using multiple different sources of information, or modalities, as model input (e.g. using both optical and radar data). Multi-modality is useful for \ac{LCC} because different modalities show different properties of the underlying land-cover, and can therefore help distinguish between classes that might appear similar in other modalities \citep{joshiReviewApplicationOptical2016}. For example, radar data can give information on the texture and wetness of the ground, which is not knowable from optical images. This information could be relevant for distinguishing between different classes. Furthermore, different modalities can 'compensate' for weaknesses in other modalities, such as radar being able to penetrate cloud cover which blocks optical light. Combining different modalities has successfully been used for \ac{LCC} in many studies \citep{joshiReviewApplicationOptical2016}.
+\ac{LCC} lends itself naturally to utilizing multi-modal data. Multi-modality refers to using multiple different sources of information, or modalities, as model input (e.g. combining optical, radar, climate, and location data). Multi-modality is useful for \ac{LCC} because different modalities show different properties of the underlying land-cover, and can therefore help distinguish between classes that might appear similar in other modalities \citep{joshiReviewApplicationOptical2016}. For example, radar data can give information on the texture and wetness of the ground, which is not knowable from optical images. This information could be relevant for distinguishing between different classes. Furthermore, different modalities can 'compensate' for weaknesses in other modalities, such as radar being able to penetrate cloud cover which blocks optical light. Combining different modalities has successfully been used for \ac{LCC} in many studies \citep{joshiReviewApplicationOptical2016}.
 For example, \citet{mahlasiEcologicalMappingGeospatial2026} show that a model with Sentinel-1, \ac{NDVI}, and \ac{DEM} as input modalities outperformed unimodal models at separating peatland from other vegetation, and \citet{shanduEnhancingLandCover2026} show that combining Sentinel-2 and \ac{DEM} data raised model accuracy by about 6 points and reduced ambiguity for minority classes compared to purely Sentinel-2 based model. Global \acp{LCM} such as WorldCover \citep{zanagaESAWorldCover102022} and its successor 'Copernicus Global Land Cover and Tropical Forest Mapping and Monitoring Service' \citep{JRC2026ATBDLCM10} successfully combine multiple modalities such as optical, radar, elevation, and climate data for their products.
 
 Another way to potentially improve \ac{LCC} is via utilizing temporal information. Multi-temporality refers to using multiple different images of the same location taken at different times, as opposed to using a single (time-averaged) image. One way temporal information can improve \ac{LCC} is by providing insight into the phenology of the underlying vegetation, which can help separate classes which are otherwise similar but have different temporal behavior (e.g. crop, herbaceous vegetation, and shrubs) \citep{mullerMiningDenseLandsat2015}. Multi-temporal data has been used for \ac{LCC} in previous studies. \citet{lopesImprovingAccuracyLand2020} used optical and radar time-series to improve \ac{LCC} accuracy in cloud covered regions. \citet{griffithsIntraannualReflectanceComposites2019} compared various time-averaging strategies, and found that using shorter time-series intervals improved overall accuracy, especially for highly dynamic classes. \citet{vuoloHowMuchDoes2018} compared multi-date and single date Sentinel-2 data for crop type classification, and concluded that multi-date data is much more effective when the optimal single-date measurement time isn't known beforehand. \citet{xuComparativeValidationRecent2024}, a comparison of various 10m-resolution \ac{LULC} maps, advices map-makers to include multi-temporality to help separate classes that are hard to characterize.
@@ -89,12 +90,12 @@ Furthermore, the effect of including various modalities and temporal information
 
 \subsection{Research Questions}
 \begin{enumerate}
-  \item How does Galileos' \ac{LCC} accuracy compare to existing models for \ac{LCC} in Africa?
-  \item How does the addition or removal of different modalities and temporal information affect Galileo performance for \ac{LCC} in Africa?
+  \item How does Galileo's land cover classification accuracy in Africa compare to that of existing land cover classification models?
+  \item To what extent does the addition of input modalities and temporal information improve Galileo's land cover classification accuracy in Africa?
         \begin{enumerate}
           \renewcommand{\labelenumii}{\alph{enumii}.}
-          \item How does the addition or removal of sentinel-1, sentinel-2, or \ac{DEM} data change Galileo performance for \ac{LCC} in Africa?
-          \item How does using a yearly vs. monthly Sentinel-1 or Sentinel-2 composite change Galileo performance for \ac{LCC} in Africa?
+          \item To what extent do additional input modalities improve Galileo's land cover classification accuracy in Africa?
+          \item To what extent does using monthly rather than annual Sentinel-1 and Sentinel-2 composites improve Galileo's land cover classification accuracy in Africa?
         \end{enumerate}
 \end{enumerate}
 
@@ -104,7 +105,7 @@ This section describes the target and testing datasets. It further describes the
 
 \begin{placedfigure}
   \centering
-  \includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/methodology_flowchart_01.pdf}
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{img/methodology_flowchart_01.pdf}
   \caption{Overview of the preliminary experiments and the experiments for the two research questions.}
   \label{fig:methodology-experiments}
 \end{placedfigure}
@@ -140,10 +141,10 @@ This thesis will use a reference land-cover dataset created by \citet{lesivGloba
   \label{fig:geowiki-class-balance}
 \end{placedfigure}
 
-A validation dataset will be created from the \citet{lesivGlobalReferenceData2025} using 20\% of the sites. Of the remaining 80\%, a subsample will be used for as the training dataset. Proportional sampling based on class occurrence with a minimum amount of samples for each class will be applied \citep{zhuOptimizingSelectionTraining2016}. Proportional sampling with a minimum amount of samples for each class provides a balanced alternative between proportional sampling, which might not provide enough training samples for minority classes, and equal sampling, which might cause the model to overpredict minority classes. The minimum amount of samples per class will be decided on at a later date. Subsampling will be applied to decrease the amount of download and processing time required, as well as to improve the class balance of the dataset. If achievable within the projects' allocated time and compuational resources, the full 80\% of the dataset will be used instead.
+A validation dataset will be created from the \citet{lesivGlobalReferenceData2025} using 20\% of the sites. Of the remaining 80\%, a subsample will be used for as the training dataset. Proportional sampling based on class occurrence with a minimum amount of samples for each class will be applied \citep{zhuOptimizingSelectionTraining2016b}. Proportional sampling with a minimum amount of samples for each class provides a balanced alternative between proportional sampling, which might not provide enough training samples for minority classes, and equal sampling, which might cause the model to overpredict minority classes. The minimum amount of samples per class will be decided on at a later date. Subsampling will be applied to decrease the amount of download and processing time required, as well as to improve the class balance of the dataset. If achievable within the projects' allocated time and compuational resources, the full 80\% of the dataset will be used instead.
 
 \subsubsection{Testing Dataset}
-The dataset created by \citet{tsendbazarProductValidationReport2022} will be used as the independent testing dataset. This dataset has been created to validate the WorldCover \citep{zanagaESAWorldCover102022} map, and has 21,624 global sites, of which 3,599 are in Africa. The dataset is organized in the same way as \citet{lesivGlobalReferenceData2025}: each 100x100m site is split up into 10x10m cells, with the land-cover of each cell having been manually labelled by experts. This dataset will only be used to assess the accuracy of the final models. (Not actually sure about using this dataset for testing -> Might be a problem for urban specifically. Other option is to create a test dataset from the Lesiv et al. data)
+The dataset created by \citet{tsendbazarProductValidationReport2022} will be used as the independent testing dataset. This dataset has been created to validate the WorldCover \citep{zanagaESAWorldCover102022} map, and has 21,624 global sites, of which 3,599 are in Africa. The dataset is organized in the same way as \citet{lesivGlobalReferenceData2025}: each 100x100m site is split up into 10x10m cells, with the land-cover of each cell having been manually labelled by experts. This dataset will only be used to assess the accuracy of the final models.
 
 \subsection{Galileo}
 Galileo \citep{tsengGalileoLearningGlobal2025} was chosen as the base \ac{GFM} for this research. Galileo has been trained with relevant input modalities for \ac{LCC}: Sentinel-1, Sentinel-2, and \ac{DEM}. Furthermore, it was trained with multi-temporal data, namely monthly sentinel-1 and 2 time-series. Other \acp{GFM}, such as TerraMind \citep{jakubikTerraMindLargeScaleGenerative2026}, THOR \citep{forgaardTHORVersatileFoundation2026}, and Prithvi \citep{szwarcmanPrithviEO20VersatileMultiTemporal2026} were considered, but either did not support multi-temporal data (in the case of TerraMind and THOR), or did not support multiple modalities (in the case of Prithvi). The \acp{GFM} Presto \citep{tsengLightweightPretrainedTransformers2024} and AnySat \citep{astrucAnySatOneEarth2025} do support both multi-modal and multi-temporal data, but Presto works on a pixel-by-pixel basis and does not utilize spatial context, and AnySat has not been pretrained with standalone DEM-data, and has been trained on less globally well-distributed training data.
@@ -152,29 +153,31 @@ Galileo has been pretrained on a global dataset spanning 127,155 sites, each sit
 
 \begin{placedtable}
   \centering
-  \caption{Input datasets and temporal resolutions used in Galileo pretraining \citep{tsengGalileoLearningGlobal2025}.}
+  \caption{Input datasets and temporal resolutions used in Galileo pretraining \citep{tsengGalileoLearningGlobal2025}. Modalities in bold are used in this thesis.}
   \label{tab:galileo-inputs}
   \small
   \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.22\textwidth}@{}}
     \hline
-    \textbf{Modality}      & \textbf{Inputs}                                                               & \textbf{Temporal Resolution}    \\
+    \textbf{Modality}                    & \textbf{Inputs}                                                                             & \textbf{Temporal Resolution}  \\
     \hline
-    Sentinel-1 SAR         & VV, VH (2 bands)                                                              & Monthly                         \\[0.4em]
-    Sentinel-2 MSI         & B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12 (10 bands)                          & Monthly                         \\[0.4em]
-    Sentinel-2 \ac{NDVI}   & \ac{NDVI} derived from B8 and B4 (1 band)                                     & Monthly                         \\[0.4em]
-    SRTM \ac{DEM}          & Elevation, slope (2 bands)                                                    & Static                          \\[0.4em]
-    Dynamic World          & Nine land-cover class probabilities                                           & Spatial, aggregated across time \\[0.4em]
-    WorldCereal            & Five crop-related mapping layers                                              & Spatial, aggregated across time \\[0.4em]
-    ERA5                   & 2 m temperature, total precipitation (2 variables)                            & Monthly time series             \\[0.4em]
-    TerraClimate           & Climate water deficit, soil moisture, actual evapotranspiration (3 variables) & Monthly time series             \\[0.4em]
-    VIIRS nighttime lights & Average radiance (1 variable)                                                 & Time series                     \\[0.4em]
-    LandScan and location  & Population and geographic coordinates                                         & Static                          \\[0.4em]
+    \textbf{Sentinel-1 SAR}              & VV, VH (2 bands)                                                                            & Monthly                       \\[0.4em]
+    \textbf{Sentinel-2 MSI + \acs{NDVI}} & B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12, plus \ac{NDVI} derived from B8 and B4 (11 bands) & Monthly                       \\[0.4em]
+    \textbf{SRTM \ac{DEM}}               & Elevation, slope (2 bands)                                                                  & Static                        \\[0.4em]
+    Dynamic World                        & Nine land-cover class probabilities                                                         & Static, temporally aggregated \\[0.4em]
+    WorldCereal                          & Five crop-related mapping layers                                                            & Static, temporally aggregated \\[0.4em]
+    \textbf{ERA5}                        & 2 m temperature, total precipitation (2 variables)                                          & Monthly                       \\[0.4em]
+    \textbf{TerraClimate}                & Climate water deficit, soil moisture, actual evapotranspiration (3 variables)               & Monthly                       \\[0.4em]
+    \textbf{VIIRS nighttime lights}      & Average radiance (1 variable)                                                               & Monthly                       \\[0.4em]
+    \textbf{LandScan Global}             & Population                                                                                  & Static                        \\[0.4em]
+    \textbf{Geographic coordinates}      & Geographic coordinates                                                                      & Static                        \\[0.4em]
     \hline
   \end{tabularx}
 \end{placedtable}
 
 \subsection{Input Datasets}
-As recommended by \citet{nedungadiFoundationModelsMeet2026}, the input datasets used for this project will mirror the Galileo input datasets as much as possible: Sentinel-1, 2, and SRTM \ac{DEM} data will be used, with the preprocessing mirroring that of Galileos' pretraining. The processing steps below were acquired from \citet{tsengGalileoLearningGlobal2025} and the corresponding Galileo GitHub repository.
+As recommended by \citet{nedungadiFoundationModelsMeet2026}, the input datasets used for this project will mirror the Galileo input datasets as much as possible: Sentinel-1 SAR,
+Sentinel-2 Optical and NDVI, SRTM DEM, ERA5 Temperature and Precipitation, TerraClimate Climate,
+VIIRS Nighttime Lights, LandScan Population, and Geographic Coordinates will be used. The preprocessing will mirror that of Galileos' pretraining. The processing steps below were acquired from \citet{tsengGalileoLearningGlobal2025} and the corresponding Galileo GitHub repository.
 
 \textbf{Sentinel-1} Sentinel-1 data will be retrieved and processed in the same way as in the Galileo pretraining. The VV and VH bands from the GRD imagery will be used. The selected timerange (2015-2016) will be divided into 30-day intervals, and for each interval any acquisition occuring in the interval will be kept. The instrument mode will be restricted to Interferometric Wide Swath (IW), and a single pass direction will be used, based on the first image found in the interval (either ascending or descending). If no acquisitions are made during the interval, the closest available acquisition will be used instead. A pixel-wise median composite will be created independently for the VV and VH bands. No speckle filtering or radiometric terrain flattering will be performed.
 
@@ -184,24 +187,26 @@ Since Sentinel-1 and 2 started operating midway through 2015, data covering the 
 
 \textbf{SRTM \ac{DEM}} SRTM \ac{DEM} data will be retrieved and processed in the same way as in the Galileo pretraining. 'USGS/SRTMGL1\_003' will be used, which has a 30m resolution and was collected in Februari of 2000. The slope will then be calculated from this dataset, and elevation and slope will be combined into a 2-band raster. The bands will be resampled to the same 10x10m grid as above using nearest neighbor. The \ac{DEM} is treated as temporally static in the model.
 
-\subsection{Preliminary Experiments}
-Preliminary experiments will be conducted to decide on appropriate values for 6 Galileo hyperparameters: model size, learning rate (separately for encoder and decoder), patch size, decoder-type, and fine-tuning paradigm. The models will be trained on a subset of the full training data, analysed using the model evaluation suite (section \ref{sec:model-evaluation}), and compared to other models using the model comparison suite (section \ref{sec:paired-model-comparison}). Due to time constraints there won't be a full grid search of the configuration space. Instead, the hyperparameters will be tested one-by-one, except for closely related hyperparameters. The best performing model settings based on these experiments will be used for further tests. The models will be evaluated using the model evaluation suite (Section~\ref{sec:model-evaluation}) and compared to each other using a paired model comparison (Section~\ref{sec:paired-model-comparison}).
+The leftover modalities will share the following preprocessing pipeline: First of all, a usable image within the 30-day interval will be identified. If no such image is identified, the band average will be used instead. Then, the data will interpolated to the same 10x10m grid as above, with 10x10m pixels inhereting the value of the overlapping coarse pixel. The site-average value will be calculated and normalized based on Galileo's pretraining data distribution. For time-series modalities (ERA5, TerraClimate, VIIRS) this will be done for each 30-day interval, resulting in 1 token per site per modality per month. For static modalities (LandScan), this will be done once per site, resulting in 1 token per site.
 
-Finding appropriate hyperparameters will be achieved in the following way:
-\begin{enumerate}
-  \item To start with, a baseline model will be trained using the configuration used by \citet{tsengGalileoLearningGlobal2025} for their main downstream image evaluation (Appendix~\ref{app:galileo-baseline}).
-  \item This baseline model will use a linear decoder. Different learning rates for this decoder will be compared and the best-performing one chosen.
-  \item Different patch sizes and decoder types will be compared jointly, due to interaction between the two parameters as observerd by \citet{schindleggerNowWeKnow2026}. The best-performing combination will be chosen.
-  \item The different model sizes will be compared. The model size will be chosen based on the observed performance to trainig time balance.
-  \item Different fine-tuning strategies will be compared and the strategy that has the best performance to training time balance will be chosen.
-\end{enumerate}
+\textbf{ERA5-Land} Monthly mean air temperature and monthly total precipitation from the ERA5-Land dataset  \citep{munoz-sabaterERA5LandStateoftheartGlobal2021} will be used. ERA5-Land is a model-based climate dataset, combining different measurents and models to estimate climate variables ranging back to 1950. This dataset has spatially coarse pixels, resulting in one or two values per site.
 
+\textbf{TerraClimate} Climatic water deficit, soil moisture, and actual evapotranspiration from the TerraClimate dataset \citep{abatzoglouTerraClimateHighresolutionGlobal2018} will be used. TerraClimate is a second model-based climate and water-balance dataset. Similarly to ERA5, the dataset is delivered on a monthly basis ranging back to 1958, with coarse spatial resolution (~4km).
 
-\textbf{Learning Rate}: A models' learning rate affects how quickly the internal model weights are able to change. An optimal learning rate allows for quick convergence, while keeping the models' optimal result relatively stable. The encoder (Galileo) and the decoder both have separate learning rates. \citet{tsengGalileoLearningGlobal2025} have trained Galileo with a wide range of learning rates. Learning rates of 1e-5 and 3e-5 will be tested to start with, with more learning rates tested based on the initial results.
+\textbf{VIIRS} Monthly average radiance composite images using nighttime lights data from VIIRS \citep{elvidgeVIIRSNighttimeLights2017} will be used. This dataset has a spatial resolution of ~460m, so each site will have 1-4 values. This dataset is prefiltered for clouds, moonlight and solar glare.
+
+\textbf{LandScan Global} Landscan Global \citep{lebakulaLandScanGlobal302025} provides a yearly global population dataset with a 1x1km resolution, using a model fed with auxiliary datasets to 'spread' cencus-based population counts over the corresponding municipal boundary.
+
+\textbf{Geographic Coordinates} For each tile, the corresponding lat/lon coordinates will be converted to 3D Cartesian coordinates on the unit sphere and used a static token.
+
+\subsection{Hyperparameter Optimization}
+Hyperparameter optimization (HPO) will be conducted to decide on appropriate values for 6 Galileo hyperparameters. Due to time constraints there won't be a full grid search of the configuration space. Instead, a Multiobjective Tree-structured Parzen Estimator (MOTPE) \citep{bergstraAlgorithmsHyperParameterOptimization2011} will be used. MOTPE is an efficient multi-objective hyperparameter optimization algorithm. In this case, the two objectives to optimize are the models' macro F1-score on the validation dataset, and the used GPU-hours (a measure of model training time). MOTPE is compatible with parallel model training, decreasing the total training time significantly. Training time per run is expected to average between 2 and 8 hours (Appendix C), and training 4-8 models in parallel should be feasible given access to WURs' 'Anunna' HPC. The python-based HPO framework 'Optuna' \citep{akibaOptunaNextgenerationHyperparameter2019} will be used to enable simple HPO and multi-processing. The following hyperparameters will be evaluated:
+
+\textbf{Learning Rate}: A model's learning rate affects how quickly the internal model weights are able to change. An optimal learning rate allows for quick convergence while keeping the model's optimal result relatively stable. The encoder (Galileo) and the decoder both have separate learning rates, which will be optimized independently. Learning rates will be tested from \(10^{-6}\) to \(10^{-4}\) for Galileo and from \(10^{-4}\) to \(10^{-2}\) for the decoder, based on results from \citet{tsengGalileoLearningGlobal2025} and \citet{castiglioniShapingFineTuningGeospatial2025}.
 
 \textbf{Decoder type}: A decoder is a small, relatively simple model attached to the encoder (in this case Galileo). The decoder is responsible for converting the spatial embeddings created by Galileo into pixel-wise classifications. Decoder choice affects model performance \citep{schindleggerNowWeKnow2026,escofetFinetuneSmarterNot2025}. Therefore, three different decoders will be tested. First, a linear decoder will be used, which is a single neural network layer that maps Galileos' output to the land cover classes, giving a probablity per class. This decoder is simple and has few trainable parameters. Secondly, a UPerNet decoder \citep{xiaoUnifiedPerceptualParsing2018} will also be tested. This decoder combines features from different scales as a way to inject more spatial context into the output. This decoder is more complex and has more trainable parameters. UPerNet was shown by \citet{schindleggerNowWeKnow2026} to outperform a linear decoder when used in combination with TerraMind and THOR, but the performance gain decreased with a smaller patch size. Last, a U-Net \citep{ronnebergerUNetConvolutionalNetworks2015} decoder will be tested, as \citet{escofetFinetuneSmarterNot2025} recommend using a U-Net decoder when working with \ac{GFM}s.
 
-\textbf{Patch size}: Galileo has been pretrained using patch sizes ranging from 1 to 8. Since choice of patch size has been found to have a significant impact on \ac{GFM} performance \citep{schindleggerNowWeKnow2026}, patch sizes of 4 and 8 will be tested.
+\textbf{Patch size}: Galileo has been pretrained using patch sizes ranging from 1 to 8. Since choice of patch size has been found to have a significant impact on \ac{GFM} performance \citep{schindleggerNowWeKnow2026}, patch sizes of 2, 4 and 8 will be tested.
 
 \textbf{Model size}: Three different versions of Galileo have been pretrained by \citet{tsengGalileoLearningGlobal2025}, varying in parameter count: Nano (0.8M parameters), Tiny (5.3M parameters), and Base (85M parameters). Larger models are more capable, but also require more training time. All three model sizes will be tested.
 
@@ -212,7 +217,7 @@ Galileo, with the hyperparameters chosen using the preliminary experiments descr
 
 \subsection{Research Question 2}
 \subsubsection{Assessing Different Modalities}
-Galileo will be trained with different combinations of input modalities: Sentinel-1, Sentinel-2, and the SRTM \ac{DEM}. All possible combinations of modalities will be used for model training. Each trained model will then be evaluated using the model evaluation and map accuracy assessment suites (sections \ref{sec:model-evaluation} and \ref{sec:accuracy-assessment}). The results will be analysed to gain insight into how the different modalities contribute to the model output.
+Galileo will be trained with different combinations of input modalities: Sentinel-1, Sentinel-2, SRTM \ac{DEM}, ERA5 Temperature / precipitation, TerraClimate Climate, VIIRS Nighttime Lights, LandScan Population, and Geographic Coordinates. These modalities are identical to the modalities used to pretrain Galileo, with modalities that could potentially 'leak' classification data to the model (Dynamic World LCC, WorldCereal Crop Mapping) taken out. Modalities will be added in an order that reflects a realistic global land cover classification modelling project: Sentinel-2-only will be used as a baseline, Sentinel-1 will then be added, then DEM, coordinates, TerraClimate, ERA5, VIIRS, and LandScan in that order. Each trained model will be evaluated using the model evaluation and map accuracy assessment suites (sections \ref{sec:model-evaluation} and \ref{sec:accuracy-assessment}). The results will be analysed to gain insight into how the different modalities contribute to the model output.
 
 \subsubsection{Assessing Added Value of Increased Temporal Resolution}
 Galileo will also be tested with monthly and yearly composites of Sentinel-1 and Sentinel-2 data. The effect of changing the temporal resolution of Sentinel-1 and Sentinel-2 will be tested independently, based the results of \citet{lopesImprovingAccuracyLand2020},  who have found that increasing the temporal resolution of different modalities impacts accuracy differently. The following model training configurations will be tested:
@@ -239,26 +244,67 @@ Accuracy differences between models will be calculated based on a pixel-by-pixel
 Model performance between different geographical regions and climates will be tested. Established climate zone and geographical region datasets will be used to segment the sites, allowing for comparison. Model performance in cloud-heavy regions will also be examined. Model performances' relationship with heterogeneity will be examined \citep{xuComparativeValidationRecent2024}. Finally, qualitative mapping quality will be assessed, looking for mapping artifacts, spatial detail, boundary quality, and systematic errors.
 
 \section{Time Schedule}
-\begin{itemize}
-  \item Time schedule / main milestones
-        \begin{itemize}
-          \item Proposal
-          \item Midterm
-          \item Research questions
-          \item Writing / finalizing
-        \end{itemize}
-  \item Use Gantt Chart
-\end{itemize}
+\begin{placedfigure}
+  % Span the full paper width, ignoring the side margins.
+  \makebox[\textwidth][c]{\includegraphics[width=\paperwidth,height=\textheight,keepaspectratio]{img/Gantt_chart.pdf}}
+  \caption{Gantt-Chart for the Thesis.}
+  \label{fig:Gantt-chart}
+\end{placedfigure}
 
 \section{Feasibility}
-\begin{itemize}
-  \item Potential risks and how will you mitigate these?
-        \begin{itemize}
-          \item Computing time
-          \item Data access
-          \item Knowledge gap
-        \end{itemize}
-\end{itemize}
+This section covers the most important potential feasibility issues for this project.
+
+\paragraph{Downloading Time and \acs{GEE} Limitations}
+Data for the 8 modalities needs to be downloaded for all \(\sim\)48,000 sites. This is a large amount of data and can take a long time to finish (Table~\ref{tab:feasibility-data}). The main bottleneck is expected to be \ac{GEE}'s processing and downloading speed, as well as the amount of \ac{GEE} credits available. In order to mitigate this issue, data for a small subselection of sites will be downloaded first. The rest of the scripts will be created using this subselection as input, while data for all the sites is being downloaded. In this way, long downloading times will not delay the project completion. Furthermore, the different modalities can be downloaded in parallel, given enough \ac{GEE} credits.
+
+\begin{placedtable}
+  \centering
+  \caption{Estimated download and preprocessing time and storage for all sites, per modality. Measured values are extrapolated from the test site in Table~\ref{tab:input-data-per-site}.}
+  \label{tab:feasibility-data}
+  \footnotesize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth} *{5}{>{\raggedleft\arraybackslash}X} >{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
+    \hline
+    \textbf{Modality}           & \textbf{Download (h)} & \textbf{Preproc. (h)} & \textbf{Total (h)} & \textbf{Raw (GB)} & \textbf{Processed (GB)} & \textbf{Basis}                                 \\
+    \hline
+    Sentinel-1 SAR              & 60.3                  & 2.8                   & 63.1               & 9.07              & 2.32                    & Measured (Table~\ref{tab:input-data-per-site}) \\[0.4em]
+    Sentinel-2 MSI + \acs{NDVI} & 95.1                  & 6.3                   & 101.4              & 13.56             & 12.35                   & Measured (Table~\ref{tab:input-data-per-site}) \\[0.4em]
+    SRTM \acs{DEM}              & 24.1                  & 1.5                   & 25.6               & 0.14              & 0.29                    & Measured (Table~\ref{tab:input-data-per-site}) \\[0.4em]
+    ERA5 temp.\ / precip.       & 33.5                  & 1.3                   & 34.8               & 0.14              & 2.32                    & Estimated                                      \\[0.4em]
+    TerraClimate                & 33.5                  & 1.3                   & 34.8               & 0.14              & 3.43                    & Estimated                                      \\[0.4em]
+    VIIRS nighttime lights      & 33.5                  & 1.3                   & 34.8               & 0.14              & 1.16                    & Estimated                                      \\[0.4em]
+    LandScan population         & 24.1                  & 1.3                   & 25.5               & 0.14              & 0.10                    & Estimated                                      \\[0.4em]
+    Geographic coordinates      & 0                     & \(\sim\)0             & \(\sim\)0          & 0                 & \(\sim\)0               & Computed locally                               \\
+    \hline
+    \textbf{Total}              & \textbf{304.2}        & \textbf{15.9}         & \textbf{320.1}     & \textbf{23.3}     & \textbf{22.0}           & Sequential                                     \\
+    \hline
+  \end{tabularx}
+\end{placedtable}
+
+\paragraph{Model Training Time}
+This thesis will involve \(\sim\)40 training runs (Table~\ref{tab:feasibility-runs}), each taking between 1 and 10 hours on an NVIDIA A100 GPU (Appendix~\ref{app:galileo-training-times}). This is a significant time investment. To mitigate this, during the hyperparameter optimization a limit will be placed on the model training time. In this way, slow-training model configurations will be filtered out. Furthermore, the code for answering the research questions can be developed and tested using a placeholder model configuration, while the hyperparameter tuning is being run.
+
+\begin{placedtable}
+  \centering
+  \caption{Estimated number of model training runs.}
+  \label{tab:feasibility-runs}
+  \small
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.33\textwidth} >{\raggedleft\arraybackslash}p{0.08\textwidth} >{\raggedright\arraybackslash}X@{}}
+    \hline
+    \textbf{Step}              & \textbf{Runs}       & \textbf{Basis}                                                     \\
+    \hline
+    Hyperparameter tuning      & \(\sim\)30          & Assumed; number of trials not set.                                 \\[0.4em]
+    RQ1: full model            & 1                   & All modalities, monthly S1 and S2.                                 \\[0.4em]
+    RQ2A: modality experiments & 8                   & One model per modality left out.                                   \\[0.4em]
+    RQ2B: temporal experiments & 3                   & Four configurations; monthly S1 + monthly S2 reuses the RQ1 model. \\
+    \hline
+    \textbf{Total}             & \textbf{\(\sim\)42} &                                                                    \\
+    \hline
+  \end{tabularx}
+\end{placedtable}
+
+\paragraph{Anunna Capacity}
+Models will be trained on Anunna: the Wageningen High Performance Computing cluster. The Anunna GPUs are in high demand. Therefore it is hard to estimate how long model training, and especially hyperparameter tuning, will take. In the event of Anunna being busier than expected, the amount of hyperparameter tuning runs will be reduced, and the maximum training time of the model will be reduced as well.
 
 \clearpage
 \addcontentsline{toc}{section}{References}
@@ -292,5 +338,72 @@ Model performance between different geographical regions and climates will be te
     \hline
   \end{tabularx}
 \end{placedtable}
+
+\subsection{Input Data Download and Preprocessing Test}
+\label{app:input-data-test}
+\setcounter{table}{0}
+
+To estimate download time and size if the input data for all sites, Sentinel-1, Sentinel-2, and the SRTM \ac{DEM} were downloaded and preprocessed for one test site. The area was \(300 \times 300\) m (\(100 \times 100\) m site plus a 100 m margin on each side), and Sentinel-1 and Sentinel-2 used twelve 30-day steps from 1 July 2015 to 1 July 2016.
+
+\begin{placedtable}
+  \centering
+  \caption{Time and file size per site for the test site.}
+  \label{tab:input-data-per-site}
+  \small
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth} *{5}{>{\raggedleft\arraybackslash}X}@{}}
+    \hline
+    \textbf{Modality}     & \textbf{Download (s)} & \textbf{Preproc. (s)} & \textbf{Total (s)} & \textbf{Raw (MB)} & \textbf{Processed (MB)} \\
+    \hline
+    Sentinel-1 SAR        & 4.5                   & 0.21                  & 4.7                & 0.188             & 0.048                   \\[0.4em]
+    Sentinel-2 MSI + NDVI & 7.1                   & 0.47                  & 7.6                & 0.281             & 0.256                   \\[0.4em]
+    SRTM \ac{DEM}         & 1.8                   & 0.11                  & 1.9                & 0.003             & 0.006                   \\
+    \hline
+  \end{tabularx}
+\end{placedtable}
+
+\begin{placedtable}
+  \centering
+  \caption{Estimated time and storage for 1000 sites, extrapolated from Table~\ref{tab:input-data-per-site} (sequential processing, no parallel requests).}
+  \label{tab:input-data-per-1000}
+  \small
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth} *{3}{>{\raggedleft\arraybackslash}X}@{}}
+    \hline
+    \textbf{Modality}     & \textbf{Time (h)} & \textbf{Raw (MB)} & \textbf{Processed (MB)} \\
+    \hline
+    Sentinel-1 SAR        & 1.3               & 188               & 48                      \\[0.4em]
+    Sentinel-2 MSI + NDVI & 2.1               & 281               & 256                     \\[0.4em]
+    SRTM \ac{DEM}         & 0.5               & 3                 & 6                       \\
+    \hline
+  \end{tabularx}
+\end{placedtable}
+\subsection{Estimated Galileo Training Times}
+\label{app:galileo-training-times}
+\setcounter{table}{0}
+
+Table~\ref{tab:galileo-training-times} provides literature-based estimates for training of Galileo models on one NVIDIA A100 80~GB GPU, one of the GPU types available at the WUR's Anunna compute cluster.
+
+\begin{placedtable}
+  \centering
+  \caption{Approximate Galileo training times on one NVIDIA A100 80~GB.}
+  \label{tab:galileo-training-times}
+  \small
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth} >{\raggedright\arraybackslash}X >{\raggedleft\arraybackslash}p{0.17\textwidth} >{\raggedleft\arraybackslash}p{0.19\textwidth}@{}}
+    \hline
+    \textbf{Model} & \textbf{Fine-tuning strategy} & \textbf{Time per epoch} & \textbf{Total (20 epochs)} \\
+    \hline
+    Nano (0.8M)    & Frozen encoder                & 1--3 min                & 20--60 min                 \\[0.4em]
+    Nano           & LoRA                          & 2--5 min                & 40--100 min                \\[0.4em]
+    Nano           & Full                          & 2--6 min                & 40--120 min                \\[0.4em]
+    Tiny (5.3M)    & Frozen encoder                & 2--5 min                & 40--100 min                \\[0.4em]
+    Tiny           & LoRA                          & 3--8 min                & 1--2.7 h                   \\[0.4em]
+    Tiny           & Full                          & 4--10 min               & 1.3--3.3 h                 \\[0.4em]
+    Base (85M)     & Frozen encoder                & 5--15 min               & 1.7--5 h                   \\[0.4em]
+    Base           & LoRA                          & 8--22 min               & 2.7--7.3 h                 \\[0.4em]
+    Base           & Full                          & 10--30 min              & 3.3--10 h                  \\
+    \hline
+  \end{tabularx}
+\end{placedtable}
+
+The scenario uses approximately 45,000 sites, with an assumed 80/20 train/validation split. Inputs are Sentinel-1 and Sentinel-2 observations at 12 monthly time steps, together with a static elevation input. The estimations are derived from \citet{tsengGalileoLearningGlobal2025},\allowbreak~\citet{johnsonHighResolutionLiveFuel2025a}, and \citet{lauberSwissCrop25NationalMultiYear2026}.
 
 \end{document}

@@ -1,89 +1,88 @@
 <mxfile host="Electron">
   <diagram id="methodology" name="Evaluation and Assessment">
-    <mxGraphModel dx="1741" dy="1270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1840" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="826" dy="601" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-11" connectable="0" parent="1" style="group;verticalAlign=middle;" value="" vertex="1">
-          <mxGeometry height="324" width="990" x="820" y="590" as="geometry" />
-        </mxCell>
-        <mxCell id="assessment" parent="eVtXEVgfVqh4OvFOuJaT-11" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#F3F5F8;strokeColor=#D3DBE4;strokeWidth=1.5;container=0;fontFamily=Computer Modern;verticalAlign=middle;" value="" vertex="1">
-          <mxGeometry height="166" width="990" y="34" as="geometry" />
-        </mxCell>
-        <mxCell id="assessment_title" parent="eVtXEVgfVqh4OvFOuJaT-11" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Computer Modern;fontSize=22;fontStyle=1;fontColor=#253344;spacing=0;" value="Map Accuracy Assessment" vertex="1">
-          <mxGeometry height="30" width="440" x="6" as="geometry" />
-        </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-13" edge="1" parent="eVtXEVgfVqh4OvFOuJaT-11" source="regions" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="heterogeneity">
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-4" edge="1" parent="1" source="validation" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;defaultLabelBackgroundColor=page;endArrow=block;endFill=1;" target="classify">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="regions" parent="eVtXEVgfVqh4OvFOuJaT-11" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Compare model performance&lt;br&gt;between different geographical&lt;br&gt;regions / climates, and examine&lt;br&gt;model performance in cloud-heavy&lt;br&gt;regions" vertex="1">
-          <mxGeometry height="135" width="285" x="32.5" y="50" as="geometry" />
+        <mxCell id="validation" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFBF3;strokeColor=#C7A15D;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="&lt;b&gt;Validation dataset:&amp;nbsp;&lt;/b&gt;20% of Lesiv et al., 2025 sites. Will be used for selection of optimal model configuration (decoder, patch size, fine-tuning strategy)." vertex="1">
+          <mxGeometry height="98" width="330" x="64" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-14" edge="1" parent="eVtXEVgfVqh4OvFOuJaT-11" source="heterogeneity" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="visual">
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-3" edge="1" parent="1" source="test" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;defaultLabelBackgroundColor=page;endArrow=block;endFill=1;" target="classify">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="heterogeneity" parent="eVtXEVgfVqh4OvFOuJaT-11" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Examine model performance&lt;br&gt;relationship with heterogeneity&lt;br&gt;(as per Xu et al., 2024)." vertex="1">
-          <mxGeometry height="98" width="240" x="357.5" y="68.5" as="geometry" />
+        <mxCell id="test" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFBF3;strokeColor=#C7A15D;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="&lt;b&gt;Test dataset:&amp;nbsp;&lt;/b&gt;Validation dataset for WorldCover (Tsendbazar et al., 2022). Will be used for assessing final models’ classification accuracy." vertex="1">
+          <mxGeometry height="98" width="330" x="434" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="visual" parent="eVtXEVgfVqh4OvFOuJaT-11" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Examine mapping quality visually.&lt;br&gt;Looking at possible mapping artifacts, spatial detail, boundary quality, and systematic errors" vertex="1">
-          <mxGeometry height="120" width="300" x="657.5" y="57.5" as="geometry" />
+        <mxCell id="classify" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FDF3F6;strokeColor=#CE718D;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Use trained model to classify&lt;br&gt;dataset:&lt;br&gt;• Validation dataset for preliminary&lt;br&gt;models (testing different&lt;br&gt;hyperparameters)&lt;br&gt;• Test dataset for final models&lt;br&gt;(model evaluation and assessment)" vertex="1">
+          <mxGeometry height="150" width="290" x="269" y="207.5" as="geometry" />
         </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-3" edge="1" parent="1" source="validation" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="classify">
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-7" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="350" width="240" x="26" y="386" as="geometry" />
+        </mxCell>
+        <mxCell id="evaluation" parent="JCgKQoEf4tsI4SLFM4VI-7" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#F3F5F8;strokeColor=#D3DBE4;strokeWidth=1.5;container=0;fontFamily=Computer Modern;verticalAlign=middle;fontSize=14;align=center;" value="" vertex="1">
+          <mxGeometry height="350" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="evaluation_title" parent="JCgKQoEf4tsI4SLFM4VI-7" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=14;fontStyle=1;fontColor=#253344;spacing=0;direction=south;horizontal=0;" value="Model Evaluation" vertex="1">
+          <mxGeometry height="114" width="30" x="-5" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-5" edge="1" parent="JCgKQoEf4tsI4SLFM4VI-7" source="overall" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;defaultLabelBackgroundColor=page;endArrow=block;endFill=1;" target="classes">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="validation" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFBF3;strokeColor=#C7A15D;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="&lt;b&gt;Validation dataset:&amp;nbsp;&lt;/b&gt;20% of Lesiv et al., 2025 sites. Will be used for selection of optimal model configuration (decoder, patch size, fine-tuning strategy)." vertex="1">
-          <mxGeometry height="120" width="330" x="40" y="350" as="geometry" />
+        <mxCell id="overall" parent="JCgKQoEf4tsI4SLFM4VI-7" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Calculate overall accuracy&lt;br&gt;metrics and confidence intervals:&lt;br&gt;• Overall accuracy&lt;br&gt;• Overall precision and recall&lt;br&gt;• Macro-F1" vertex="1">
+          <mxGeometry height="135" width="195" x="22.5" y="25" as="geometry" />
         </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-4" edge="1" parent="1" source="test" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="classify">
+        <mxCell id="classes" parent="JCgKQoEf4tsI4SLFM4VI-7" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Calculate class-specific accuracy&lt;br&gt;metrics and confidence intervals:&lt;br&gt;• Precision&lt;br&gt;• Recall&lt;br&gt;• F1-score&lt;br&gt;• Weighted confusion matrix" vertex="1">
+          <mxGeometry height="150" width="202.5" x="18.75" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-9" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="480" width="247.5" x="287" y="386" as="geometry" />
+        </mxCell>
+        <mxCell id="assessment" parent="JCgKQoEf4tsI4SLFM4VI-9" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#F3F5F8;strokeColor=#D3DBE4;strokeWidth=1.5;container=0;fontFamily=Computer Modern;verticalAlign=middle;fontSize=14;align=center;" value="" vertex="1">
+          <mxGeometry height="480" width="240" x="7.5" as="geometry" />
+        </mxCell>
+        <mxCell id="assessment_title" parent="JCgKQoEf4tsI4SLFM4VI-9" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=14;fontStyle=1;fontColor=#253344;spacing=0;horizontal=0;direction=south;" value="Map Accuracy Assessment" vertex="1">
+          <mxGeometry height="184" width="30" x="2" y="11" as="geometry" />
+        </mxCell>
+        <mxCell id="regions" parent="JCgKQoEf4tsI4SLFM4VI-9" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Compare model performance&lt;br&gt;between different geographical&lt;br&gt;regions / climates, and examine&lt;br&gt;model performance in cloud-heavy&lt;br&gt;regions" vertex="1">
+          <mxGeometry height="170" width="195" x="30" y="21" as="geometry" />
+        </mxCell>
+        <mxCell id="heterogeneity" parent="JCgKQoEf4tsI4SLFM4VI-9" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Examine model performance&lt;br&gt;relationship with heterogeneity&lt;br&gt;(as per Xu et al., 2024)." vertex="1">
+          <mxGeometry height="98" width="195" x="30" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="visual" parent="JCgKQoEf4tsI4SLFM4VI-9" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Examine mapping quality visually.&lt;br&gt;Looking at possible mapping artifacts, spatial detail, boundary quality, and systematic errors" vertex="1">
+          <mxGeometry height="120" width="195" x="30" y="329" as="geometry" />
+        </mxCell>
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-10" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="201" width="245" x="556" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="comparison" parent="JCgKQoEf4tsI4SLFM4VI-10" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#F3F5F8;strokeColor=#D3DBE4;strokeWidth=1.5;container=0;fontFamily=Computer Modern;verticalAlign=middle;fontSize=14;align=center;" value="" vertex="1">
+          <mxGeometry height="195" width="240" x="5" y="6" as="geometry" />
+        </mxCell>
+        <mxCell id="comparison_title" parent="JCgKQoEf4tsI4SLFM4VI-10" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=14;fontStyle=1;fontColor=#253344;spacing=0;direction=south;horizontal=0;" value="Paired Model Comparison" vertex="1">
+          <mxGeometry height="195" width="30" x="3" as="geometry" />
+        </mxCell>
+        <mxCell id="paired" parent="JCgKQoEf4tsI4SLFM4VI-10" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=14;align=center;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Calculate accuracy differences between models: Delta-F1, Precision, Recall (global and per-class) based on paired model comparison. Report confidence intervals using bootstrapping." vertex="1">
+          <mxGeometry height="150" width="195" x="34" y="28.5" as="geometry" />
+        </mxCell>
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-12" edge="1" parent="1" source="classify" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;defaultLabelBackgroundColor=page;endArrow=block;endFill=1;" target="regions">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="test" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFBF3;strokeColor=#C7A15D;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="&lt;b&gt;Test dataset:&amp;nbsp;&lt;/b&gt;Validation dataset for WorldCover (Tsendbazar et al., 2022). Will be used for assessing final models’ classification accuracy." vertex="1">
-          <mxGeometry height="120" width="330" x="40" y="540" as="geometry" />
-        </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-12" edge="1" parent="1" source="classify" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="regions">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="classify" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FDF3F6;strokeColor=#CE718D;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Use trained model to classify&lt;br&gt;dataset:&lt;br&gt;&amp;nbsp;&lt;br&gt;• Validation dataset for preliminary&lt;br&gt;models (testing different&lt;br&gt;hyperparameters)&lt;br&gt;• Test dataset for final models&lt;br&gt;(model evaluation and assessment)" vertex="1">
-          <mxGeometry height="195" width="290" x="440" y="406.5" as="geometry" />
-        </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-9" connectable="0" parent="1" style="group;verticalAlign=middle;" value="" vertex="1">
-          <mxGeometry height="184" width="470" x="820" y="400" as="geometry" />
-        </mxCell>
-        <mxCell id="comparison" parent="eVtXEVgfVqh4OvFOuJaT-9" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#F3F5F8;strokeColor=#D3DBE4;strokeWidth=1.5;container=0;fontFamily=Computer Modern;verticalAlign=middle;" value="" vertex="1">
-          <mxGeometry height="150" width="470" y="34" as="geometry" />
-        </mxCell>
-        <mxCell id="comparison_title" parent="eVtXEVgfVqh4OvFOuJaT-9" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Computer Modern;fontSize=22;fontStyle=1;fontColor=#253344;spacing=0;" value="Paired Model Comparison" vertex="1">
-          <mxGeometry height="30" width="440" x="6" as="geometry" />
-        </mxCell>
-        <mxCell id="paired" parent="eVtXEVgfVqh4OvFOuJaT-9" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Calculate accuracy differences between models: Delta-F1, Precision, Recall (global and per-class) based on paired model comparison. Report confidence intervals using bootstrapping." vertex="1">
-          <mxGeometry height="111" width="425" x="25" y="49" as="geometry" />
-        </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-8" edge="1" parent="1" source="classify" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="paired">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-10" connectable="0" parent="1" style="group;verticalAlign=middle;" value="" vertex="1">
-          <mxGeometry height="230" width="650" x="820" y="160" as="geometry" />
-        </mxCell>
-        <mxCell id="evaluation" parent="eVtXEVgfVqh4OvFOuJaT-10" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;fillColor=#F3F5F8;strokeColor=#D3DBE4;strokeWidth=1.5;container=0;fontFamily=Computer Modern;verticalAlign=middle;" value="" vertex="1">
-          <mxGeometry height="195" width="650" y="35" as="geometry" />
-        </mxCell>
-        <mxCell id="evaluation_title" parent="eVtXEVgfVqh4OvFOuJaT-10" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Computer Modern;fontSize=22;fontStyle=1;fontColor=#253344;spacing=0;" value="Model Evaluation" vertex="1">
-          <mxGeometry height="30" width="440" x="6" as="geometry" />
-        </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-7" edge="1" parent="eVtXEVgfVqh4OvFOuJaT-10" source="overall" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="classes">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="overall" parent="eVtXEVgfVqh4OvFOuJaT-10" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Calculate overall accuracy&lt;br&gt;metrics and confidence intervals:&lt;br&gt;• Overall accuracy&lt;br&gt;• Overall precision and recall&lt;br&gt;• Macro-F1" vertex="1">
-          <mxGeometry height="135" width="270" x="25" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="classes" parent="eVtXEVgfVqh4OvFOuJaT-10" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F6FAF0;strokeColor=#9CB16F;strokeWidth=1.5;fontColor=#253344;fontFamily=Computer Modern;fontSize=16;align=left;verticalAlign=middle;spacingLeft=17;spacingRight=17;spacingTop=17;spacingBottom=12;lineHeight=1.5;" value="Calculate class-specific accuracy&lt;br&gt;metrics and confidence intervals:&lt;br&gt;• Precision&lt;br&gt;• Recall&lt;br&gt;• F1-score&lt;br&gt;• Weighted confusion matrix" vertex="1">
-          <mxGeometry height="160" width="285" x="340" y="47.5" as="geometry" />
-        </mxCell>
-        <mxCell id="eVtXEVgfVqh4OvFOuJaT-5" edge="1" parent="1" source="classify" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=1;" target="overall">
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-13" edge="1" parent="1" source="classify" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;defaultLabelBackgroundColor=page;endArrow=block;endFill=1;" target="overall">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="790" y="504" />
-              <mxPoint x="790" y="287.5" />
+              <mxPoint x="414" y="370" />
+              <mxPoint x="146" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JCgKQoEf4tsI4SLFM4VI-15" edge="1" parent="1" source="classify" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8895A5;strokeWidth=1.5;align=center;verticalAlign=middle;fontFamily=Computer Modern;fontSize=11;fontColor=default;labelBackgroundColor=default;defaultLabelBackgroundColor=page;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="paired">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="414" y="370" />
+              <mxPoint x="687.5" y="370" />
             </Array>
           </mxGeometry>
         </mxCell>

@@ -37,6 +37,8 @@ substitute these project values. The starter notebook is
   existing environment variables win). Keep secrets only in `.env` or the environment,
   list variable names in `.env.example`, and import `config` in notebooks instead of
   reading `os.environ` directly.
+- LaTeX: do not compile LaTeX documents (e.g. with `latexmk` or `pdflatex`) in
+  `reports/`. Edit the `.tex` sources only; the user compiles them.
 
 ## Task routing — conditional requirements
 
